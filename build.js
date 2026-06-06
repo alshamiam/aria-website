@@ -637,6 +637,7 @@ function vercelJson() {
     buildCommand: "node build.js",
     outputDirectory: "dist",
     framework: null,
+    functions: { "api/contact.js": { maxDuration: 30 } },
     cleanUrls: true,
     trailingSlash: false,
     redirects: [
