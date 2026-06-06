@@ -32,7 +32,7 @@ module.exports = {
     "piano-lessons": "البيانو",
     "vocal-lessons": "الغناء",
     "kids-music": "الأطفال",
-    "instructors": "المعلّمون",
+    "instructors": "المؤسِّستان",
     "about": "عن الأكاديمية",
     "contact": "تواصل"
   },
@@ -103,7 +103,7 @@ module.exports = {
             { name: "نيلوفر جعفرلي", role: "شريكة مؤسِّسة · المديرة الفنية", line: "عازفة بيانو حفلات، أكاديمية باكو للموسيقى (بكالوريوس وماجستير)، حائزة جوائز دولية.", img: "grand-piano-room" },
             { name: "شيماء شعراني", role: "شريكة مؤسِّسة · المديرة التنفيذية", line: "مدرّبة صوتية ومربّية، الجامعة الأميركية في بيروت — أكثر من ٩ سنوات في تدريس كل الأعمار.", img: "piano-lounge" }
           ],
-          cta: { label: "تعرّف على معلّميك", slug: "instructors" }
+          cta: { label: "تعرّف على المؤسِّستين", slug: "instructors" }
         },
         {
           type: "faq",
@@ -185,7 +185,7 @@ module.exports = {
           title: "اجلس إلى البيانو.",
           text: "احجز درس بيانو تجريبياً واشعر بالفرق حين تتعلّم من فنانة تؤدّي.",
           primary: { label: "احجز درساً تجريبياً", slug: "contact" },
-          secondary: { label: "تعرّف على المعلّمين", slug: "instructors" }
+          secondary: { label: "تعرّف على المؤسِّستين", slug: "instructors" }
         }
       ],
       schema: {
@@ -254,7 +254,7 @@ module.exports = {
           title: "لنسمع صوتك.",
           text: "احجز درس غناء تجريبياً وابدأ ببناء صوت تثق به.",
           primary: { label: "احجز درساً تجريبياً", slug: "contact" },
-          secondary: { label: "تعرّف على المعلّمين", slug: "instructors" }
+          secondary: { label: "تعرّف على المؤسِّستين", slug: "instructors" }
         }
       ],
       schema: {
@@ -334,9 +334,9 @@ module.exports = {
     "instructors": {
       slug: "instructors",
       kind: "interior",
-      title: "معلّمونا | نيلوفر جعفرلي وشيماء شعراني — أكاديمية آريا للموسيقى",
+      title: "مؤسِّستانا | نيلوفر جعفرلي وشيماء شعراني — أكاديمية آريا للموسيقى",
       description: "تعرّف على مؤسِّستَي أكاديمية آريا للموسيقى: نيلوفر جعفرلي، عازفة بيانو حفلات ومديرة فنية، وشيماء شعراني، مدرّبة صوتية ومديرة تنفيذية، بخبرة طويلة في الأداء والتعليم في الكويت.",
-      h1: "تعرّف على معلّميك",
+      h1: "تعرّف على المؤسِّستين",
       lede: "أُسّست آريا على يد فنانتين تُعلّمان لأنهما تحبّان ذلك. أنت تتعلّم منهما مباشرةً.",
       heroImg: "grand-piano-art",
       sections: [
@@ -425,7 +425,7 @@ module.exports = {
           title: "تعالَ وشاهد بنفسك.",
           text: "زُر الأكاديمية والتقِ معلّمك من خلال درس تجريبي.",
           primary: { label: "احجز درساً تجريبياً", slug: "contact" },
-          secondary: { label: "تعرّف على المعلّمين", slug: "instructors" }
+          secondary: { label: "تعرّف على المؤسِّستين", slug: "instructors" }
         }
       ],
       schema: { extraWebPage: true }

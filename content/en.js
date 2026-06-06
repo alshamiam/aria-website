@@ -33,7 +33,7 @@ module.exports = {
     "piano-lessons": "Piano",
     "vocal-lessons": "Vocal",
     "kids-music": "Kids",
-    "instructors": "Instructors",
+    "instructors": "Founders",
     "about": "About",
     "contact": "Contact"
   },
@@ -105,7 +105,7 @@ module.exports = {
             { name: "Nilufar Jafarli", role: "Co-Founder · Artistic Director", line: "Concert pianist, Baku Music Academy (BMus & MMus), international prize-winner.", img: "grand-piano-room" },
             { name: "Chaimaa Chaarani", role: "Co-Founder · Executive Director", line: "Vocal coach & educator, American University of Beirut — 9+ years teaching all ages.", img: "piano-lounge" }
           ],
-          cta: { label: "Meet your instructors", slug: "instructors" }
+          cta: { label: "Meet the founders", slug: "instructors" }
         },
         {
           type: "faq",
@@ -188,7 +188,7 @@ module.exports = {
           title: "Sit down at the piano.",
           text: "Book a trial piano lesson and feel the difference of learning from a performer.",
           primary: { label: "Book a Trial Lesson", slug: "contact" },
-          secondary: { label: "Meet the Instructors", slug: "instructors" }
+          secondary: { label: "Meet the Founders", slug: "instructors" }
         }
       ],
       schema: {
@@ -258,7 +258,7 @@ module.exports = {
           title: "Let's hear your voice.",
           text: "Book a trial vocal lesson and start building a voice you trust.",
           primary: { label: "Book a Trial Lesson", slug: "contact" },
-          secondary: { label: "Meet the Instructors", slug: "instructors" }
+          secondary: { label: "Meet the Founders", slug: "instructors" }
         }
       ],
       schema: {
@@ -340,9 +340,9 @@ module.exports = {
     "instructors": {
       slug: "instructors",
       kind: "interior",
-      title: "Our Instructors | Nilufar Jafarli & Chaimaa Chaarani — Aria Music Academy",
+      title: "Our Founders | Nilufar Jafarli & Chaimaa Chaarani — Aria Music Academy",
       description: "Meet the founders of Aria Music Academy: Nilufar Jafarli, concert pianist and artistic director, and Chaimaa Chaarani, vocal coach and executive director. Decades of performance and teaching in Kuwait.",
-      h1: "Meet Your Instructors",
+      h1: "Meet the Founders",
       lede: "Aria was founded by two performers who teach because they love it. You learn directly from them.",
       heroImg: "grand-piano-art",
       sections: [
@@ -432,7 +432,7 @@ module.exports = {
           title: "Come and see for yourself.",
           text: "Visit the academy and meet your teacher with a trial lesson.",
           primary: { label: "Book a Trial Lesson", slug: "contact" },
-          secondary: { label: "Meet the Instructors", slug: "instructors" }
+          secondary: { label: "Meet the Founders", slug: "instructors" }
         }
       ],
       schema: { extraWebPage: true }
