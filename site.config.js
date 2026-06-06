@@ -40,7 +40,7 @@ module.exports = {
 
   // ⚠ Real social profiles (remove any you don't use). sameAs improves entity SEO.
   social: {
-    instagram: "https://instagram.com/ariamusicacademy",
+    instagram: "https://www.instagram.com/ariamusicacademy.kw",
     facebook: "",
     youtube: "",
     tiktok: ""
