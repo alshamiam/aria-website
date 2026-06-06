@@ -13,6 +13,13 @@ const ROOT = __dirname;
 const DIST = path.join(ROOT, "dist");
 const cfg = require("./site.config.js");
 const content = { en: require("./content/en.js"), ar: require("./content/ar.js") };
+const COUNTRIES = require("./content/countries.js");
+
+// ISO2 -> flag emoji
+function flag(iso) {
+  return String(iso || "").toUpperCase().replace(/[A-Z]/g, (ch) =>
+    String.fromCodePoint(0x1f1e6 + ch.charCodeAt(0) - 65));
+}
 
 const SITE = cfg.siteUrl.replace(/\/+$/, "");
 const LANGS = cfg.langs;
@@ -203,10 +210,15 @@ function renderContact(lang) {
 </ul>`;
 
   const opts = ui.interestOptions.map((o) => `<option>${esc(o)}</option>`).join("");
+  const ccOptions = COUNTRIES.map((co) =>
+    `<option value="${attr(co.d)}"${co.c === "KW" ? " selected" : ""}>${flag(co.c)} ${esc(co.n)} ${esc(co.d)}</option>`).join("");
   const form = `<form class="enquiry" id="enquiry" action="/api/contact" method="post">
 <p class="lead" style="font-size:1.05rem;margin-bottom:1.4rem">${esc(ui.formIntro)}</p>
 <div class="form-field"><label for="f-name">${esc(ui.formName)} <span aria-hidden="true" style="color:var(--gold-deep)">*</span></label><input id="f-name" name="name" type="text" required></div>
-<div class="form-field"><label for="f-phone">${esc(ui.formPhone)} <span aria-hidden="true" style="color:var(--gold-deep)">*</span></label><input id="f-phone" name="phone" type="tel" required></div>
+<div class="form-field"><label for="f-phone">${esc(ui.formPhone)} <span aria-hidden="true" style="color:var(--gold-deep)">*</span></label>
+<div style="display:flex;gap:8px">
+<select id="f-cc" aria-label="Country code" style="width:auto;flex:0 0 auto;max-width:46%;min-width:120px">${ccOptions}</select>
+<input id="f-phone" name="phone" type="tel" required style="flex:1 1 auto;min-width:0" inputmode="tel" autocomplete="tel-national"></div></div>
 <div class="form-field"><label for="f-email">${esc(ui.formEmail)} <span aria-hidden="true" style="color:var(--gold-deep)">*</span></label><input id="f-email" name="email" type="email" required></div>
 <div class="form-field"><label for="f-interest">${esc(ui.formInterest)}</label><select id="f-interest" name="interest">${opts}</select></div>
 <div class="form-field"><label for="f-msg">${esc(ui.formMessage)}</label><textarea id="f-msg" name="message" rows="4"></textarea></div>
@@ -239,7 +251,8 @@ function renderContact(lang) {
   var g=function(n){var el=f.querySelector('[name="'+n+'"]');return el?el.value.trim():'';};
   f.addEventListener('submit',function(e){
     e.preventDefault();
-    var data={name:g('name'),phone:g('phone'),email:g('email'),interest:g('interest'),message:g('message'),company:g('company'),lang:L};
+    var cc=(f.querySelector('#f-cc')||{}).value||'';
+    var data={name:g('name'),phone:(cc?cc+' ':'')+g('phone'),email:g('email'),interest:g('interest'),message:g('message'),company:g('company'),lang:L};
     if(!f.checkValidity()){f.reportValidity();return;}
     var btn=f.querySelector('button[type=submit]');btn.disabled=true;s.style.color='';s.textContent=T.send;
     fetch('/api/contact',{method:'POST',headers:{'Content-Type':'application/json','x-requested-with':'fetch'},body:JSON.stringify(data)})
