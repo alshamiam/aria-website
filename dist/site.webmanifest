@@ -1,0 +1,23 @@
+{
+  "name": "Aria Music Academy",
+  "short_name": "Aria",
+  "description": "Aria Music Academy offers refined piano and vocal lessons in Kuwait for children and adults — taught one-to-one by a concert pianist and a vocal coach in an elegant, purpose-built studio.",
+  "start_url": "/en/",
+  "display": "standalone",
+  "background_color": "#2e1430",
+  "theme_color": "#2e1430",
+  "lang": "en",
+  "icons": [
+    {
+      "src": "/assets/logo/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/logo/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
