@@ -60,9 +60,9 @@
 </ul></div>
 <div class="reveal d1"><form class="enquiry" id="enquiry" action="/api/contact" method="post">
 <p class="lead" style="font-size:1.05rem;margin-bottom:1.4rem">أخبرنا قليلاً عن الطالب وما الذي ترغب في تعلّمه، وسنرد عليك بالمواعيد المتاحة والخطوات التالية.</p>
-<div class="form-field"><label for="f-name">الاسم الكامل</label><input id="f-name" name="name" type="text" required></div>
-<div class="form-field"><label for="f-phone">الهاتف / واتساب</label><input id="f-phone" name="phone" type="tel" required></div>
-<div class="form-field"><label for="f-email">البريد الإلكتروني</label><input id="f-email" name="email" type="email"></div>
+<div class="form-field"><label for="f-name">الاسم الكامل <span aria-hidden="true" style="color:var(--gold-deep)">*</span></label><input id="f-name" name="name" type="text" required></div>
+<div class="form-field"><label for="f-phone">الهاتف / واتساب <span aria-hidden="true" style="color:var(--gold-deep)">*</span></label><input id="f-phone" name="phone" type="tel" required></div>
+<div class="form-field"><label for="f-email">البريد الإلكتروني <span aria-hidden="true" style="color:var(--gold-deep)">*</span></label><input id="f-email" name="email" type="email" required></div>
 <div class="form-field"><label for="f-interest">أرغب في</label><select id="f-interest" name="interest"><option>دروس بيانو</option><option>دروس غناء / تدريب صوتي</option><option>دروس لطفلي</option><option>مبتدئ بالغ</option><option>لست متأكداً بعد</option></select></div>
 <div class="form-field"><label for="f-msg">رسالتك</label><textarea id="f-msg" name="message" rows="4"></textarea></div>
 <input type="text" name="company" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);border:0">
@@ -86,7 +86,7 @@
   f.addEventListener('submit',function(e){
     e.preventDefault();
     var data={name:g('name'),phone:g('phone'),email:g('email'),interest:g('interest'),message:g('message'),company:g('company'),lang:L};
-    if(!data.name||!data.phone){s.style.color='var(--gold-deep)';s.textContent=T.need;return;}
+    if(!f.checkValidity()){f.reportValidity();return;}
     var btn=f.querySelector('button[type=submit]');btn.disabled=true;s.style.color='';s.textContent=T.send;
     fetch('/api/contact',{method:'POST',headers:{'Content-Type':'application/json','x-requested-with':'fetch'},body:JSON.stringify(data)})
       .then(function(r){if(!r.ok)throw new Error('bad');return r.json();})

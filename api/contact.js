@@ -81,7 +81,7 @@ module.exports = async function handler(req, res) {
   if ((body.company || "").toString().trim()) { // honeypot
     return isFetch ? res.status(200).json({ ok: true }) : res.status(200).send("Thank you.");
   }
-  if (!name || !phone) return res.status(400).json({ error: "Name and phone are required." });
+  if (!name || !phone || !email) return res.status(400).json({ error: "Name, phone and email are required." });
 
   const key = process.env.RESEND_API_KEY;
   if (!key) return res.status(500).json({ error: "Email is not configured yet." });

@@ -205,9 +205,9 @@ function renderContact(lang) {
   const opts = ui.interestOptions.map((o) => `<option>${esc(o)}</option>`).join("");
   const form = `<form class="enquiry" id="enquiry" action="/api/contact" method="post">
 <p class="lead" style="font-size:1.05rem;margin-bottom:1.4rem">${esc(ui.formIntro)}</p>
-<div class="form-field"><label for="f-name">${esc(ui.formName)}</label><input id="f-name" name="name" type="text" required></div>
-<div class="form-field"><label for="f-phone">${esc(ui.formPhone)}</label><input id="f-phone" name="phone" type="tel" required></div>
-<div class="form-field"><label for="f-email">${esc(ui.formEmail)}</label><input id="f-email" name="email" type="email"></div>
+<div class="form-field"><label for="f-name">${esc(ui.formName)} <span aria-hidden="true" style="color:var(--gold-deep)">*</span></label><input id="f-name" name="name" type="text" required></div>
+<div class="form-field"><label for="f-phone">${esc(ui.formPhone)} <span aria-hidden="true" style="color:var(--gold-deep)">*</span></label><input id="f-phone" name="phone" type="tel" required></div>
+<div class="form-field"><label for="f-email">${esc(ui.formEmail)} <span aria-hidden="true" style="color:var(--gold-deep)">*</span></label><input id="f-email" name="email" type="email" required></div>
 <div class="form-field"><label for="f-interest">${esc(ui.formInterest)}</label><select id="f-interest" name="interest">${opts}</select></div>
 <div class="form-field"><label for="f-msg">${esc(ui.formMessage)}</label><textarea id="f-msg" name="message" rows="4"></textarea></div>
 <input type="text" name="company" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);border:0">
@@ -240,7 +240,7 @@ function renderContact(lang) {
   f.addEventListener('submit',function(e){
     e.preventDefault();
     var data={name:g('name'),phone:g('phone'),email:g('email'),interest:g('interest'),message:g('message'),company:g('company'),lang:L};
-    if(!data.name||!data.phone){s.style.color='var(--gold-deep)';s.textContent=T.need;return;}
+    if(!f.checkValidity()){f.reportValidity();return;}
     var btn=f.querySelector('button[type=submit]');btn.disabled=true;s.style.color='';s.textContent=T.send;
     fetch('/api/contact',{method:'POST',headers:{'Content-Type':'application/json','x-requested-with':'fetch'},body:JSON.stringify(data)})
       .then(function(r){if(!r.ok)throw new Error('bad');return r.json();})
