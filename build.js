@@ -619,6 +619,9 @@ function webmanifest() {
 
 function vercelJson() {
   return JSON.stringify({
+    buildCommand: "node build.js",
+    outputDirectory: "dist",
+    framework: null,
     cleanUrls: true,
     trailingSlash: false,
     redirects: [
