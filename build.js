@@ -239,7 +239,7 @@ function renderContact(lang) {
   var g=function(n){var el=f.querySelector('[name="'+n+'"]');return el?el.value.trim():'';};
   f.addEventListener('submit',function(e){
     e.preventDefault();
-    var data={name:g('name'),phone:g('phone'),email:g('email'),interest:g('interest'),message:g('message'),company:g('company')};
+    var data={name:g('name'),phone:g('phone'),email:g('email'),interest:g('interest'),message:g('message'),company:g('company'),lang:L};
     if(!data.name||!data.phone){s.style.color='var(--gold-deep)';s.textContent=T.need;return;}
     var btn=f.querySelector('button[type=submit]');btn.disabled=true;s.style.color='';s.textContent=T.send;
     fetch('/api/contact',{method:'POST',headers:{'Content-Type':'application/json','x-requested-with':'fetch'},body:JSON.stringify(data)})
