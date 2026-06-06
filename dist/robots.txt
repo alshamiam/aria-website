@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://ariamusicacademy.com/sitemap.xml
+Sitemap: https://ariamusicacademy.org/sitemap.xml

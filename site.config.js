@@ -5,7 +5,7 @@
    ============================================================ */
 module.exports = {
   // ⚠ Your final domain (used for canonical URLs, hreflang, sitemap, OG).
-  siteUrl: "https://ariamusicacademy.com",
+  siteUrl: "https://ariamusicacademy.org",
 
   defaultLang: "en",
   langs: ["en", "ar"],
@@ -17,7 +17,7 @@ module.exports = {
     phoneDisplay: "+965 0000 0000",        // ⚠
     phoneE164: "+9650000000",              // ⚠ used for tel: + WhatsApp link
     whatsapp: "9650000000",                // ⚠ digits only, no +
-    email: "hello@ariamusicacademy.com",   // ⚠
+    email: "info@ariamusicacademy.org",   // ⚠
     // ⚠ Real address. addressLocality e.g. an area name in Kuwait.
     address: {
       streetAddress: { en: "Building 00, Street 00, Block 0", ar: "مبنى ٠٠، شارع ٠٠، قطعة ٠" },
