@@ -56,7 +56,7 @@ module.exports = {
         secondary: { label: "Explore Lessons", slug: "piano-lessons" },
         stats: [
           { n: "1-to-1", label: "Private Tuition" },
-          { n: "Ages 5+", label: "Children & Adults" },
+          { n: "Ages 3+", label: "Children & Adults" },
           { n: "EN · AR", label: "Bilingual Teaching" }
         ]
       },
@@ -83,7 +83,7 @@ module.exports = {
               points: ["Classical foundations & technique", "Read music and play by ear", "Recital & exam preparation", "Children and adults welcome"] },
             { title: "Vocal & Singing", who: "All levels", slug: "vocal-lessons",
               points: ["Healthy, sustainable vocal technique", "Breath, pitch & stage confidence", "Sing and accompany yourself on piano", "Performance & audition coaching"] },
-            { title: "Music for Kids", who: "Ages 5+", slug: "kids-music",
+            { title: "Music for Kids", who: "Ages 3+", slug: "kids-music",
               points: ["Playful, structured first lessons", "Builds focus, memory & confidence", "Friendly progress milestones", "Parents kept in the loop"] }
           ]
         },
@@ -113,7 +113,7 @@ module.exports = {
           title: "Frequently asked questions",
           items: [
             { q: "Do I need any experience to start?", a: "Not at all. Most of our students begin as complete beginners — children and adults alike. We start exactly where you are." },
-            { q: "How old does my child need to be?", a: "We generally start children from around age five, when they can focus comfortably for a short lesson. We'll happily advise based on a quick chat." },
+            { q: "How old does my child need to be?", a: "We generally start children from around age three, when they can focus comfortably for a short lesson. We'll happily advise based on a quick chat." },
             { q: "Are lessons in Arabic or English?", a: "Both. Our teaching is fully bilingual, so lessons run comfortably in Arabic or English depending on what suits the student." },
             { q: "Can I book a trial before committing?", a: "Yes. A trial lesson is the best way to meet your teacher and see the studio. Get in touch and we'll arrange a time." }
           ]
@@ -274,9 +274,9 @@ module.exports = {
       slug: "kids-music",
       kind: "interior",
       title: "Music Lessons for Kids in Kuwait | Piano & Singing — Aria Music Academy",
-      description: "Music lessons for children in Kuwait — piano and singing from age five. Playful, structured and confidence-building, taught by professional musicians. Book a trial lesson.",
+      description: "Music lessons for children in Kuwait — piano and singing from age three. Playful, structured and confidence-building, taught by professional musicians. Book a trial lesson.",
       h1: "Music Lessons for Kids in Kuwait",
-      lede: "Where children fall in love with music — structured, playful lessons that build skill and confidence from age five.",
+      lede: "Where children fall in love with music — structured, playful lessons that build skill and confidence from age three.",
       heroImg: "piano-lounge",
       sections: [
         {
@@ -285,7 +285,7 @@ module.exports = {
           title: "More than music — a foundation for life.",
           html: [
             "Learning an instrument gives children far more than a skill. It builds focus, patience, memory and self-discipline, and it gives them a deep, lasting source of confidence and joy. At Aria, children's lessons are carefully structured yet genuinely fun, so progress feels like play.",
-            "We teach piano and singing to children from around age five. Each child follows their own learning plan with clear, encouraging milestones — and parents are always kept in the loop on how their child is getting on."
+            "We teach piano and singing to children from around age three. Each child follows their own learning plan with clear, encouraging milestones — and parents are always kept in the loop on how their child is getting on."
           ]
         },
         {
@@ -314,7 +314,7 @@ module.exports = {
           type: "faq",
           title: "Questions from parents",
           items: [
-            { q: "What's the right age to start?", a: "Around five is a common starting point, once a child can focus for a short lesson. Every child is different, so we're glad to advise after a quick chat." },
+            { q: "What's the right age to start?", a: "Around three is a common starting point, once a child can focus for a short lesson. Every child is different, so we're glad to advise after a quick chat." },
             { q: "Piano or singing for my child?", a: "Both are wonderful first instruments. Piano gives a strong all-round musical foundation; singing is natural and immediate. We can help you choose, or start with a trial." },
             { q: "How much should my child practise?", a: "For young beginners, short and regular is best — even ten focused minutes a day. We'll set realistic, encouraging targets." },
             { q: "Can I stay during the lesson?", a: "We'll discuss what works best for your child. Many settle quickly into their own lesson; we always keep you informed of their progress." }
@@ -331,7 +331,7 @@ module.exports = {
       schema: {
         course: {
           name: "Music Lessons for Kids",
-          description: "Piano and singing lessons for children in Kuwait from age five — playful, structured tuition that builds musical skill, focus and confidence."
+          description: "Piano and singing lessons for children in Kuwait from age three — playful, structured tuition that builds musical skill, focus and confidence."
         }
       }
     },
