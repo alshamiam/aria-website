@@ -658,7 +658,8 @@ function build() {
   write("sitemap.xml", sitemap());
   write("robots.txt", robots());
   write("site.webmanifest", webmanifest());
-  write("vercel.json", vercelJson());
+  // vercel.json must sit at the REPO ROOT (Vercel reads it from there, not from the output dir)
+  fs.writeFileSync(path.join(ROOT, "vercel.json"), vercelJson());
 
   console.log(`✓ Built ${count} pages (${LANGS.join(", ")}) + root + sitemap/robots/manifest/vercel.json`);
   console.log(`  Output: ${DIST}`);
