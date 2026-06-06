@@ -203,14 +203,16 @@ function renderContact(lang) {
 </ul>`;
 
   const opts = ui.interestOptions.map((o) => `<option>${esc(o)}</option>`).join("");
-  const form = `<form class="enquiry" id="enquiry" action="mailto:${attr(b.email)}" method="post" enctype="text/plain">
+  const form = `<form class="enquiry" id="enquiry" action="/api/contact" method="post">
 <p class="lead" style="font-size:1.05rem;margin-bottom:1.4rem">${esc(ui.formIntro)}</p>
 <div class="form-field"><label for="f-name">${esc(ui.formName)}</label><input id="f-name" name="name" type="text" required></div>
 <div class="form-field"><label for="f-phone">${esc(ui.formPhone)}</label><input id="f-phone" name="phone" type="tel" required></div>
 <div class="form-field"><label for="f-email">${esc(ui.formEmail)}</label><input id="f-email" name="email" type="email"></div>
 <div class="form-field"><label for="f-interest">${esc(ui.formInterest)}</label><select id="f-interest" name="interest">${opts}</select></div>
 <div class="form-field"><label for="f-msg">${esc(ui.formMessage)}</label><textarea id="f-msg" name="message" rows="4"></textarea></div>
+<input type="text" name="company" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);border:0">
 <button class="btn btn-gold" type="submit">${esc(ui.formSend)}</button>
+<p class="form-note" id="form-status" role="status" aria-live="polite"></p>
 <p class="form-note">${esc(ui.whatsapp)} · <a href="${waLink("")}" target="_blank" rel="noopener" style="color:var(--gold-deep)">${esc(b.phoneDisplay)}</a></p>
 </form>`;
 
@@ -227,15 +229,28 @@ function renderContact(lang) {
 <script>
 (function(){
   var f=document.getElementById('enquiry');if(!f)return;
+  var s=document.getElementById('form-status');
+  var L=${JSON.stringify(lang)};
+  var T=L==='ar'
+    ?{need:'يرجى إدخال الاسم ورقم الهاتف.',send:'جارٍ الإرسال…',ok:'شكراً لك! وصلَنا طلبك وسنتواصل معك قريباً.',fail:'تعذّر الإرسال — نفتح لك واتساب الآن…',
+       n:'الاسم',p:'الهاتف',e:'البريد',i:'مهتم بـ',m:'الرسالة',intro:'مرحباً، أرغب بحجز درس تجريبي في أكاديمية آريا.'}
+    :{need:'Please add your name and phone number.',send:'Sending…',ok:'Thank you! Your enquiry has reached us — we\\'ll be in touch shortly.',fail:'Couldn\\'t send just now — opening WhatsApp for you…',
+       n:'Name',p:'Phone',e:'Email',i:'Interested in',m:'Message',intro:'Hello, I would like to book a trial lesson at Aria Music Academy.'};
+  var g=function(n){var el=f.querySelector('[name="'+n+'"]');return el?el.value.trim():'';};
   f.addEventListener('submit',function(e){
     e.preventDefault();
-    var g=function(n){var el=f.querySelector('[name="'+n+'"]');return el?el.value:'';};
-    var L=${JSON.stringify(lang)};
-    var lbl=L==='ar'
-      ?{n:'الاسم',p:'الهاتف',e:'البريد',i:'مهتم بـ',m:'الرسالة',intro:'مرحباً، أرغب بحجز درس تجريبي في أكاديمية آريا.'}
-      :{n:'Name',p:'Phone',e:'Email',i:'Interested in',m:'Message',intro:'Hello, I would like to book a trial lesson at Aria Music Academy.'};
-    var t=lbl.intro+'\\n\\n'+lbl.n+': '+g('name')+'\\n'+lbl.p+': '+g('phone')+'\\n'+lbl.e+': '+g('email')+'\\n'+lbl.i+': '+g('interest')+'\\n'+lbl.m+': '+g('message');
-    window.open(${JSON.stringify(waLink(""))}.split('?')[0]+'?text='+encodeURIComponent(t),'_blank');
+    var data={name:g('name'),phone:g('phone'),email:g('email'),interest:g('interest'),message:g('message'),company:g('company')};
+    if(!data.name||!data.phone){s.style.color='var(--gold-deep)';s.textContent=T.need;return;}
+    var btn=f.querySelector('button[type=submit]');btn.disabled=true;s.style.color='';s.textContent=T.send;
+    fetch('/api/contact',{method:'POST',headers:{'Content-Type':'application/json','x-requested-with':'fetch'},body:JSON.stringify(data)})
+      .then(function(r){if(!r.ok)throw new Error('bad');return r.json();})
+      .then(function(){f.reset();s.style.color='var(--gold-deep)';s.textContent=T.ok;})
+      .catch(function(){
+        s.textContent=T.fail;
+        var t=T.intro+'\\n\\n'+T.n+': '+data.name+'\\n'+T.p+': '+data.phone+'\\n'+T.e+': '+data.email+'\\n'+T.i+': '+data.interest+'\\n'+T.m+': '+data.message;
+        window.open(${JSON.stringify(waLink(""))}.split('?')[0]+'?text='+encodeURIComponent(t),'_blank');
+      })
+      .finally(function(){btn.disabled=false;});
   });
 })();
 </script>`;

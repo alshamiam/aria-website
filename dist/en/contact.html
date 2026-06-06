@@ -58,14 +58,16 @@
 <li><span class="k">Location</span><span class="v">Building 00, Street 00, Block 0, Kuwait City, Kuwait</span></li>
 <li><span class="k">Opening hours</span><span class="v" style="font-size:1.02rem;line-height:1.7" dir="ltr">Sa, Su, Mo, Tu, We, Th: 10:00–21:00<br>Fr: 16:00–21:00</span></li>
 </ul></div>
-<div class="reveal d1"><form class="enquiry" id="enquiry" action="mailto:info@ariamusicacademy.org" method="post" enctype="text/plain">
+<div class="reveal d1"><form class="enquiry" id="enquiry" action="/api/contact" method="post">
 <p class="lead" style="font-size:1.05rem;margin-bottom:1.4rem">Tell us a little about the student and what you'd like to learn — we'll reply with availability and the next steps.</p>
 <div class="form-field"><label for="f-name">Full name</label><input id="f-name" name="name" type="text" required></div>
 <div class="form-field"><label for="f-phone">Phone / WhatsApp</label><input id="f-phone" name="phone" type="tel" required></div>
 <div class="form-field"><label for="f-email">Email</label><input id="f-email" name="email" type="email"></div>
 <div class="form-field"><label for="f-interest">I'm interested in</label><select id="f-interest" name="interest"><option>Piano lessons</option><option>Vocal / singing lessons</option><option>Lessons for my child</option><option>Adult beginner</option><option>Not sure yet</option></select></div>
 <div class="form-field"><label for="f-msg">Message</label><textarea id="f-msg" name="message" rows="4"></textarea></div>
+<input type="text" name="company" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);border:0">
 <button class="btn btn-gold" type="submit">Send enquiry</button>
+<p class="form-note" id="form-status" role="status" aria-live="polite"></p>
 <p class="form-note">WhatsApp · <a href="https://wa.me/9650000000" target="_blank" rel="noopener" style="color:var(--gold-deep)">+965 0000 0000</a></p>
 </form></div>
 </div>
@@ -73,15 +75,28 @@
 <script>
 (function(){
   var f=document.getElementById('enquiry');if(!f)return;
+  var s=document.getElementById('form-status');
+  var L="en";
+  var T=L==='ar'
+    ?{need:'يرجى إدخال الاسم ورقم الهاتف.',send:'جارٍ الإرسال…',ok:'شكراً لك! وصلَنا طلبك وسنتواصل معك قريباً.',fail:'تعذّر الإرسال — نفتح لك واتساب الآن…',
+       n:'الاسم',p:'الهاتف',e:'البريد',i:'مهتم بـ',m:'الرسالة',intro:'مرحباً، أرغب بحجز درس تجريبي في أكاديمية آريا.'}
+    :{need:'Please add your name and phone number.',send:'Sending…',ok:'Thank you! Your enquiry has reached us — we\'ll be in touch shortly.',fail:'Couldn\'t send just now — opening WhatsApp for you…',
+       n:'Name',p:'Phone',e:'Email',i:'Interested in',m:'Message',intro:'Hello, I would like to book a trial lesson at Aria Music Academy.'};
+  var g=function(n){var el=f.querySelector('[name="'+n+'"]');return el?el.value.trim():'';};
   f.addEventListener('submit',function(e){
     e.preventDefault();
-    var g=function(n){var el=f.querySelector('[name="'+n+'"]');return el?el.value:'';};
-    var L="en";
-    var lbl=L==='ar'
-      ?{n:'الاسم',p:'الهاتف',e:'البريد',i:'مهتم بـ',m:'الرسالة',intro:'مرحباً، أرغب بحجز درس تجريبي في أكاديمية آريا.'}
-      :{n:'Name',p:'Phone',e:'Email',i:'Interested in',m:'Message',intro:'Hello, I would like to book a trial lesson at Aria Music Academy.'};
-    var t=lbl.intro+'\n\n'+lbl.n+': '+g('name')+'\n'+lbl.p+': '+g('phone')+'\n'+lbl.e+': '+g('email')+'\n'+lbl.i+': '+g('interest')+'\n'+lbl.m+': '+g('message');
-    window.open("https://wa.me/9650000000".split('?')[0]+'?text='+encodeURIComponent(t),'_blank');
+    var data={name:g('name'),phone:g('phone'),email:g('email'),interest:g('interest'),message:g('message'),company:g('company')};
+    if(!data.name||!data.phone){s.style.color='var(--gold-deep)';s.textContent=T.need;return;}
+    var btn=f.querySelector('button[type=submit]');btn.disabled=true;s.style.color='';s.textContent=T.send;
+    fetch('/api/contact',{method:'POST',headers:{'Content-Type':'application/json','x-requested-with':'fetch'},body:JSON.stringify(data)})
+      .then(function(r){if(!r.ok)throw new Error('bad');return r.json();})
+      .then(function(){f.reset();s.style.color='var(--gold-deep)';s.textContent=T.ok;})
+      .catch(function(){
+        s.textContent=T.fail;
+        var t=T.intro+'\n\n'+T.n+': '+data.name+'\n'+T.p+': '+data.phone+'\n'+T.e+': '+data.email+'\n'+T.i+': '+data.interest+'\n'+T.m+': '+data.message;
+        window.open("https://wa.me/9650000000".split('?')[0]+'?text='+encodeURIComponent(t),'_blank');
+      })
+      .finally(function(){btn.disabled=false;});
   });
 })();
 </script>
