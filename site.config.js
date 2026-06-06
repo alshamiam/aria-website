@@ -20,15 +20,15 @@ module.exports = {
     email: "info@ariamusicacademy.org",   // ⚠
     // ⚠ Real address. addressLocality e.g. an area name in Kuwait.
     address: {
-      streetAddress: { en: "Building 00, Street 00, Block 0", ar: "مبنى ٠٠، شارع ٠٠، قطعة ٠" },
-      locality:      { en: "Kuwait City", ar: "مدينة الكويت" },
-      region:        { en: "Capital Governorate", ar: "محافظة العاصمة" },
+      streetAddress: { en: "Al Thuraya Mall, Salem Al Mubarak Street", ar: "مجمع الثريا، شارع سالم المبارك" },
+      locality:      { en: "Salmiya", ar: "السالمية" },
+      region:        { en: "Hawalli Governorate", ar: "محافظة حولي" },
       country:       { en: "Kuwait", ar: "الكويت" },
       countryCode: "KW"
     },
-    geo: { lat: 29.3759, lng: 47.9774 },   // ⚠ exact lat/lng of the academy
-    // ⚠ paste the "embed" src from Google Maps (Share → Embed a map → copy the src URL)
-    mapEmbed: "",
+    geo: { lat: 29.3359, lng: 48.0709 },   // Salem Al Mubarak St, Salmiya (approx — fine-tune if needed)
+    // Keyless Google Maps embed pointing at the mall by name
+    mapEmbed: "https://www.google.com/maps?q=Al+Thuraya+Mall+Salmiya+Kuwait&output=embed",
     priceRange: "$$",
     // hours: day=>"HH:MM-HH:MM" (24h). Adjust to real opening hours.
     hours: [
