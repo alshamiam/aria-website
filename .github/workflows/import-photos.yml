@@ -1,5 +1,9 @@
 name: Import academy photos from Drive
-on: workflow_dispatch
+on:
+  workflow_dispatch:
+  push:
+    branches: [photos-import]
+    paths: ['.github/workflows/import-photos.yml']
 
 permissions:
   contents: write
