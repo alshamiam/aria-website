@@ -665,8 +665,124 @@ function vercelJson() {
   }, null, 2);
 }
 
+/* ---------------- coming soon (temporary closure) ---------------- */
+function comingSoonPage() {
+  const b = cfg.business;
+  return `<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>${esc(cfg.brandName.en)} — Coming Soon | ${esc(cfg.brandName.ar)} — قريباً</title>
+<meta name="description" content="${attr(cfg.brandName.en)} is opening soon in ${attr(b.address.locality.en)}, ${attr(b.address.country.en)}.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="canonical" href="${SITE}/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="${attr(cfg.brandName.en)}">
+<meta property="og:title" content="${attr(cfg.brandName.en)} — Coming Soon">
+<meta property="og:description" content="${attr(cfg.brandName.en)} is opening soon in ${attr(b.address.locality.en)}, ${attr(b.address.country.en)}.">
+<meta property="og:url" content="${SITE}/">
+<meta property="og:image" content="${SITE}/assets/img/og-default.jpg">
+<meta name="theme-color" content="#2e1430">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="/assets/logo/icon-192.png" sizes="192x192">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=EB+Garamond:ital@0;1&family=Jost:wght@400;500&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--plum:#2e1430;--plum-2:#3b1b3e;--gold:#e6c878;--gold-deep:#c9a24b;--cream:#f5f0e7}
+*{box-sizing:border-box;margin:0;padding:0}
+body{min-height:100vh;display:flex;align-items:center;justify-content:center;background:radial-gradient(1200px 800px at 50% -10%,var(--plum-2),var(--plum) 60%);color:var(--cream);font-family:"EB Garamond",Georgia,serif;text-align:center;padding:2rem 1.25rem}
+main{max-width:640px}
+.logo{width:160px;height:auto;margin-bottom:2.2rem}
+.rule{width:64px;height:1px;background:var(--gold-deep);margin:1.6rem auto;position:relative}
+.rule::after{content:"";position:absolute;left:50%;top:-3px;width:7px;height:7px;transform:translateX(-50%) rotate(45deg);background:var(--gold)}
+.eyebrow{font-family:Jost,sans-serif;text-transform:uppercase;letter-spacing:.32em;font-size:.72rem;color:var(--gold)}
+h1{font-family:Marcellus,Georgia,serif;font-weight:400;font-size:clamp(2rem,6vw,3.2rem);letter-spacing:.04em;margin-top:.9rem}
+.ar h1,.ar p{font-family:Amiri,serif}
+.ar{margin-top:2.6rem}
+.ar .eyebrow{font-family:Jost,sans-serif;letter-spacing:.18em}
+p.lede{font-size:1.15rem;line-height:1.8;color:#e9dfce;margin-top:1rem}
+.contact{margin-top:2.6rem;font-family:Jost,sans-serif;font-size:.92rem;letter-spacing:.04em}
+.contact a{color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(230,200,120,.35);padding-bottom:2px}
+.contact a:hover{border-color:var(--gold)}
+.contact span{margin:0 .6rem;color:var(--gold-deep)}
+</style>
+</head>
+<body>
+<main>
+<img class="logo" src="/assets/logo/aria-gold.png" srcset="/assets/logo/aria-gold@2x.png 2x" alt="${attr(cfg.brandName.en)}">
+<section>
+<span class="eyebrow">Coming Soon</span>
+<h1>${esc(cfg.brandName.en)}</h1>
+<div class="rule"></div>
+<p class="lede">Our website is taking a short intermission. We are preparing something beautiful — see you very soon in ${esc(b.address.locality.en)}, ${esc(b.address.country.en)}.</p>
+</section>
+<section class="ar" dir="rtl" lang="ar">
+<span class="eyebrow">قريباً</span>
+<h1>${esc(cfg.brandName.ar)}</h1>
+<div class="rule"></div>
+<p class="lede">موقعنا في استراحة قصيرة. نُحضّر لكم شيئاً جميلاً — نراكم قريباً جداً في ${esc(b.address.locality.ar)}، ${esc(b.address.country.ar)}.</p>
+</section>
+<p class="contact">
+<a href="mailto:${attr(b.email)}">${esc(b.email)}</a>
+${cfg.social.instagram ? `<span>·</span><a href="${attr(cfg.social.instagram)}" target="_blank" rel="noopener">Instagram</a>` : ""}
+</p>
+</main>
+</body>
+</html>`;
+}
+
+function vercelJsonComingSoon() {
+  return JSON.stringify({
+    buildCommand: "node build.js",
+    outputDirectory: "dist",
+    framework: null,
+    functions: { "api/contact.js": { maxDuration: 30 } },
+    cleanUrls: true,
+    trailingSlash: false,
+    redirects: [
+      // every page redirects to the coming-soon front page (assets/icons excluded)
+      {
+        source: "/((?!assets/|favicon\\.ico|apple-touch-icon\\.png|site\\.webmanifest|robots\\.txt).+)",
+        destination: "/",
+        permanent: false
+      }
+    ],
+    headers: [
+      {
+        source: "/assets/(.*)",
+        headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }]
+      },
+      {
+        source: "/(.*)",
+        headers: [{ key: "X-Content-Type-Options", value: "nosniff" }]
+      }
+    ]
+  }, null, 2);
+}
+
+function buildComingSoon() {
+  // remove generated pages so nothing but the coming-soon page is served
+  LANGS.forEach((lang) => fs.rmSync(path.join(DIST, lang), { recursive: true, force: true }));
+  fs.rmSync(path.join(DIST, "sitemap.xml"), { force: true });
+
+  write("index.html", comingSoonPage());
+  write("robots.txt", `User-agent: *\nDisallow: /`);
+  write("site.webmanifest", webmanifest());
+  fs.writeFileSync(path.join(ROOT, "vercel.json"), vercelJsonComingSoon());
+
+  console.log("🚧 COMING SOON mode — site temporarily closed.");
+  console.log("   All pages redirect to the bilingual coming-soon page.");
+  console.log("   To reopen: set comingSoon: false in site.config.js and re-run node build.js");
+}
+
 /* ---------------- run ---------------- */
 function build() {
+  if (cfg.comingSoon) {
+    buildComingSoon();
+    return;
+  }
   // copy static src assets
   ensureDir(path.join(DIST, "assets"));
   fs.copyFileSync(path.join(ROOT, "src/styles.css"), path.join(DIST, "assets/styles.css"));

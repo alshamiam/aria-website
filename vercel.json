@@ -11,8 +11,8 @@
   "trailingSlash": false,
   "redirects": [
     {
-      "source": "/",
-      "destination": "/en/",
+      "source": "/((?!assets/|favicon\\.ico|apple-touch-icon\\.png|site\\.webmanifest|robots\\.txt).+)",
+      "destination": "/",
       "permanent": false
     }
   ],
