@@ -4,6 +4,11 @@
       then re-run:  node build.js
    ============================================================ */
 module.exports = {
+  // 🚧 TEMPORARY CLOSURE — set to true to replace the whole site with a
+  //    bilingual "Coming Soon" page. Set back to false and re-run
+  //    `node build.js` to restore the full website.
+  comingSoon: true,
+
   // ⚠ Your final domain (used for canonical URLs, hreflang, sitemap, OG).
   siteUrl: "https://ariamusicacademy.org",
 
