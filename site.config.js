@@ -19,9 +19,9 @@ module.exports = {
 
   // ⚠ Real contact details
   business: {
-    phoneDisplay: "+965 0000 0000",        // ⚠
-    phoneE164: "+9650000000",              // ⚠ used for tel: + WhatsApp link
-    whatsapp: "9650000000",                // ⚠ digits only, no +
+    phoneDisplay: "+965 9227 3303",
+    phoneE164: "+96592273303",             // used for tel: + WhatsApp link
+    whatsapp: "96592273303",               // digits only, no +
     email: "info@ariamusicacademy.org",   // ⚠
     // ⚠ Real address. addressLocality e.g. an area name in Kuwait.
     address: {
